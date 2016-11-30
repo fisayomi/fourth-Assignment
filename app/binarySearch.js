@@ -32,31 +32,42 @@
 
 		while (this.first <= this.last && !this.found){
 			this.midpoint = Math.floor((this.last +this.first)/2);
+
 			if(this[this.midpoint] == number){
 				this.index = this.midpoint;
+				this.found = true;
+			}
+			else if(this[this.first] == number){
+				this.index = this.first;
+				this.found = true;
+			}
+			else if(this[this.last] == number){
+				this.index = this.last;
 				this.found = true;
 			}
 			else {
 				if (number < this[this.midpoint]){
 					this.last = this.midpoint -1;
+					this.first = this.first+1;
 				}
 				else {
 					this.first = this.midpoint + 1;
+					this.last = this.last-1;
 				}
 
-			}
-			if(!this.found){
-				this.count++;
+				this.count++
 			}
 				
+		}
+		
+		if(!this.found){
+			this.index = -1;
 		}
 		this.result["count"] = this.count;
 		this.result["index"] = this.index;
 		this.result["length"] = this.length;
 
-		if(!this.found){
-			this.result["index"] = -1;
-		}
+		
 
 		return this.result;
 	}
